@@ -1,1 +1,81 @@
-<p>perfil works!</p>
+<div class="perfil-container">
+  <div class="top-area">
+    <div>
+      <h1>Meu Perfil</h1>
+      <p>
+        Gerencie suas informações pessoais
+      </p>
+
+    </div>
+  </div>
+
+  <form
+    class="perfil-card"
+    [formGroup]="perfilForm"
+    (ngSubmit)="salvarPerfil()"
+  >
+
+    <div class="profile-image-area">
+      <div class="profile-image">
+        JL
+      </div>
+      <button
+        type="button"
+        class="upload-btn"
+      >
+        Alterar Foto
+      </button>
+    </div>
+
+    <div class="input-group">
+      <label>
+        Nome
+      </label>
+
+      <input
+        type="text"
+        formControlName="nome"
+      >
+    </div>
+
+    <div class="input-group">
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        formControlName="email"
+      >
+    </div>
+
+    <div class="input-group">
+      <label>
+        Senha Atual
+      </label>
+
+      <input
+        type="password"
+        formControlName="senhaAtual"
+      >
+    </div>
+
+    <div class="input-group">
+      <label>
+        Nova Senha
+      </label>
+
+      <input
+        type="password"
+        formControlName="novaSenha"
+      >
+    </div>
+
+    <button
+      type="submit"
+      class="save-btn"
+    >
+      Salvar Alterações
+    </button>
+  </form>
+</div>

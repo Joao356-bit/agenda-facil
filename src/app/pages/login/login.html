@@ -1,1 +1,93 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-left">
+    <div class="left-content">
+      <h1>
+        Organize seus agendamentos
+        em um só lugar
+      </h1>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/2693/2693507.png"
+        alt="Agenda"
+      >
+    </div>
+  </div>
+
+  <div class="login-right">
+    <form
+      class="login-card"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+
+      <h2>
+        AgendaFacil
+      </h2>
+      <p>
+        Gerencie seus agendamentos
+        de forma simples
+      </p>
+
+      <div class="input-group">
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="Digite seu email"
+          autocomplete="email"
+          formControlName="email"
+        >
+
+        @if (
+          loginForm.get('email')?.invalid &&
+          loginForm.get('email')?.touched
+        ) {
+          <small class="error-message">
+            Email inválido
+          </small>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="senha">
+          Senha
+        </label>
+        <input
+          id="senha"
+          type="password"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          formControlName="senha"
+        >
+        @if (
+          loginForm.get('senha')?.invalid &&
+          loginForm.get('senha')?.touched
+        ) {
+          <small class="error-message">
+            Senha deve possuir ao menos 6 caracteres
+          </small>
+
+        }
+      </div>
+
+      <div class="links">
+        <a routerLink="/cadastro">
+          Cadastre-se
+        </a>
+
+        <a routerLink="/esqueci-senha">
+          Esqueci minha senha
+        </a>
+      </div>
+
+      <button
+        type="submit"
+        class="login-btn"
+      >
+        Entrar
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,116 @@
-<p>cadastro works!</p>
+<div class="cadastro-container">
+  <form
+    class="cadastro-card"
+    [formGroup]="cadastroForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h1>AgendaFacil</h1>
+    <p>
+      Faça seu cadastro
+    </p>
+    <div class="input-group">
+      <label for="nome">
+        Nome Completo
+      </label>
+
+      <input
+        id="nome"
+        type="text"
+        placeholder="Digite seu nome"
+        autocomplete="name"
+        formControlName="nome"
+      >
+      @if (
+        cadastroForm.get('nome')?.invalid &&
+        cadastroForm.get('nome')?.touched
+      ) {
+        <small class="error-message">
+          Nome deve possuir ao menos 3 caracteres
+        </small>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="Digite seu email"
+        autocomplete="email"
+        formControlName="email"
+      >
+      @if (
+        cadastroForm.get('email')?.invalid &&
+        cadastroForm.get('email')?.touched
+      ) {
+        <small class="error-message">
+          Email inválido
+        </small>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="senha">
+        Senha
+      </label>
+
+      <input
+        id="senha"
+        type="password"
+        placeholder="Digite sua senha"
+        autocomplete="new-password"
+        formControlName="senha"
+      >
+      @if (
+        cadastroForm.get('senha')?.invalid &&
+        cadastroForm.get('senha')?.touched
+      ) {
+        <small class="error-message">
+          Senha deve possuir ao menos 6 caracteres
+        </small>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="confirmarSenha">
+        Confirmar Senha
+      </label>
+
+      <input
+        id="confirmarSenha"
+        type="password"
+        placeholder="Confirme sua senha"
+        autocomplete="new-password"
+        formControlName="confirmarSenha"
+      >
+      @if (
+        cadastroForm.get('confirmarSenha')?.invalid &&
+        cadastroForm.get('confirmarSenha')?.touched
+      ) {
+        <small class="error-message">
+          Confirme sua senha
+        </small>
+      }
+    </div>
+
+    <button
+      type="submit"
+      class="cadastro-btn"
+    >
+      Cadastrar
+    </button>
+
+    <div class="footer-link">
+      <span>
+        Já possui conta?
+      </span>
+
+      <a routerLink="/">
+        Entrar
+      </a>
+    </div>
+  </form>
+</div>

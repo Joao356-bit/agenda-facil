@@ -1,0 +1,73 @@
+.recovery-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f6fb;
+  padding: 30px;
+}
+
+.recovery-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recovery-card h1 {
+  color: #222;
+}
+
+.recovery-card p {
+  color: #777;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-group input {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.send-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: #243bff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back-link {
+  text-align: center;
+  color: #243bff;
+  font-weight: 600;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #43a047;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+}
