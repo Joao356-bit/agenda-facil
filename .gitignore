@@ -1,4 +1,7 @@
-node_modules
-dist
-.angular
-.vscode
+node_modules/
+dist/
+.angular/
+uploads/
+*.sqlite
+*.db
+.env
