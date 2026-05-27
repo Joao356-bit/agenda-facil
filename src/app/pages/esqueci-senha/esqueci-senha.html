@@ -1,0 +1,47 @@
+<div class="recovery-container">
+  <div class="recovery-card">
+    <h1>
+      Recuperar Senha
+    </h1>
+    <p>
+      Informe seu email para receber
+      o link de recuperação
+    </p>
+
+    @if (mensagem) {
+      <div class="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        {{ mensagem }}
+      </div>
+    }
+
+    <form
+      [formGroup]="recoveryForm"
+      (ngSubmit)="enviarLink()"
+    >
+      <div class="input-group">
+        <label>
+          Email
+        </label>
+
+        <input
+          type="email"
+          placeholder="Digite seu email"
+          formControlName="email"
+        >
+      </div>
+      <button
+        type="submit"
+        class="send-btn"
+      >
+        Enviar Link
+      </button>
+    </form>
+    <a
+      routerLink="/"
+      class="back-link"
+    >
+      Voltar ao Login
+    </a>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-left {
+  flex: 1;
+  background-color: #243bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.left-content {
+  color: white;
+  max-width: 450px;
+}
+
+.left-content h1 {
+  font-size: 52px;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+
+.left-content img {
+  width: 100%;
+  max-width: 320px;
+}
+
+.login-right {
+  flex: 1;
+  background-color: #f4f6fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: white;
+  padding: 50px;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.login-card h2 {
+  font-size: 38px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.login-card p {
+  color: #777;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.input-group input {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #243bff;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.links a {
+  color: #243bff;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background-color: #243bff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  opacity: 0.92;
+}
+
+@media (max-width: 900px) {
+  .login-left {
+    display: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: 35px;
+  }
+
+  .login-card h2 {
+    font-size: 32px;
+  }
+}
+
+.error-message {
+  margin-top: 6px;
+  color: #e53935;
+  font-size: 13px;
+}

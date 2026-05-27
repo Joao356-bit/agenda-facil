@@ -1,0 +1,157 @@
+<div class="agendamento-container">
+
+  <div class="top-area">
+
+    <div>
+
+      <h1>
+        Novo Agendamento
+      </h1>
+
+      <p>
+        Cadastre um novo atendimento
+      </p>
+
+    </div>
+
+  </div>
+
+  <form
+    class="agendamento-card"
+    [formGroup]="agendamentoForm"
+    (ngSubmit)="onSubmit()"
+  >
+
+    <div class="input-group">
+
+      <label>
+        Cliente
+      </label>
+
+      <input
+        type="text"
+        placeholder="Digite o nome do cliente"
+        formControlName="cliente"
+      >
+
+    </div>
+
+    <div class="input-group">
+
+      <label>
+        Profissional
+      </label>
+
+      <select
+        formControlName="profissional"
+      >
+
+        <option value="">
+          Selecione
+        </option>
+
+        @for (
+          profissional of profissionais;
+          track profissional.id
+        ) {
+
+          <option
+            [value]="profissional.id"
+          >
+
+            {{ profissional.nome }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+    <div class="input-group">
+
+      <label>
+        Serviço
+      </label>
+
+      <input
+        type="text"
+        placeholder="Digite o serviço"
+        formControlName="servico"
+      >
+
+    </div>
+
+    <div class="input-group">
+
+      <label>
+        Data
+      </label>
+
+      <input
+        type="date"
+        formControlName="data"
+      >
+
+    </div>
+
+    <div class="input-group">
+
+      <label>
+        Horário
+      </label>
+
+      <select
+        formControlName="horario"
+      >
+
+        <option value="">
+          Selecione
+        </option>
+
+        @for (
+          horario of horarios;
+          track horario
+        ) {
+
+          <option
+            [value]="horario"
+          >
+
+            {{ horario }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+    <div class="input-group">
+
+      <label>
+        Observações
+      </label>
+
+      <textarea
+        rows="5"
+        placeholder="Digite observações..."
+        formControlName="observacoes"
+      ></textarea>
+
+    </div>
+
+    <button
+      type="submit"
+      class="save-btn"
+    >
+
+      Salvar Agendamento
+
+    </button>
+
+  </form>
+
+</div>

@@ -1,0 +1,175 @@
+<div class="layout-container">
+
+@if(mensagem){
+
+<div class="toast-global">
+
+<i class="fa-solid fa-circle-check"></i>
+
+{{ mensagem }}
+
+</div>
+
+}
+
+@if(confirmacao){
+
+<div class="modal-overlay">
+
+<div class="modal">
+
+<h2>
+
+Confirmação
+
+</h2>
+
+<p>
+
+{{ confirmacao.mensagem }}
+
+</p>
+
+<div
+style="
+display:flex;
+gap:10px;
+margin-top:20px;">
+
+<button
+class="cancel-btn"
+(click)="fecharModal()">
+
+Cancelar
+
+</button>
+
+<button
+class="save-btn"
+(click)="confirmar()">
+
+Confirmar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+}
+
+<aside class="sidebar">
+
+<div class="sidebar-top">
+
+<div class="logo">
+
+<h2>
+AgendaFacil
+</h2>
+
+</div>
+
+<nav class="menu">
+
+<a
+routerLink="/dashboard"
+routerLinkActive="active-link">
+
+<i class="fa-solid fa-chart-line"></i>
+Dashboard
+
+</a>
+
+<a
+routerLink="/profissionais"
+routerLinkActive="active-link">
+
+<i class="fa-solid fa-user-doctor"></i>
+Profissionais
+
+</a>
+
+<a
+routerLink="/agenda"
+routerLinkActive="active-link">
+
+<i class="fa-solid fa-calendar-days"></i>
+Agenda
+
+</a>
+
+<a
+routerLink="/novo-agendamento"
+routerLinkActive="active-link">
+
+<i class="fa-solid fa-calendar-plus"></i>
+Novo Agendamento
+
+</a>
+
+<a
+routerLink="/perfil"
+routerLinkActive="active-link">
+
+<i class="fa-solid fa-user"></i>
+Perfil
+
+</a>
+
+</nav>
+
+</div>
+
+<div class="sidebar-footer">
+
+<a
+class="logout-btn"
+(click)="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Sair
+
+</a>
+
+</div>
+
+</aside>
+
+<div class="main-content">
+
+<header class="header">
+
+<input
+type="text"
+placeholder="Buscar..."
+class="search-input"
+[(ngModel)]="textoBusca"
+(keyup.enter)="buscar()">
+
+<div class="user-area">
+
+<i class="fa-solid fa-user-circle"></i>
+
+<span>
+
+Usuário
+
+</span>
+
+</div>
+
+</header>
+
+<main class="page-content">
+
+<router-outlet></router-outlet>
+
+</main>
+
+</div>
+
+</div>

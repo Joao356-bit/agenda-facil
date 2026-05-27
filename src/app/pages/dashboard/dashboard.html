@@ -1,0 +1,145 @@
+<div class="dashboard-container">
+
+  <div class="dashboard-header">
+
+    <div>
+
+      <h1>
+        Dashboard
+      </h1>
+
+      <p>
+        Bem-vindo ao sistema AgendaFacil
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="card-icon">
+
+        <i class="fa-solid fa-calendar-check"></i>
+
+      </div>
+
+      <h2>
+
+        {{ dados.totalAgendamentos }}
+
+      </h2>
+
+      <p>
+
+        Agendamentos
+
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="card-icon">
+
+        <i class="fa-solid fa-user-doctor"></i>
+
+      </div>
+
+      <h2>
+
+        {{ dados.totalProfissionais }}
+
+      </h2>
+
+      <p>
+
+        Profissionais
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="bottom-grid">
+
+    <div class="recent-card">
+
+      <div class="section-header">
+
+        <h2>
+
+          Agendamentos Recentes
+
+        </h2>
+
+      </div>
+
+      <div class="recent-list">
+
+        @if(
+        dados.recentes.length===0
+        ){
+
+        <div class="recent-item">
+
+          <div class="recent-info">
+
+            <h3>
+
+              Nenhum agendamento encontrado
+
+            </h3>
+
+          </div>
+
+        </div>
+
+        }
+
+        @for (
+
+        item of dados.recentes;
+
+        track item.id
+
+        ){
+
+        <div class="recent-item">
+
+          <div class="recent-info">
+
+            <h3>
+
+              {{ item.cliente }}
+
+            </h3>
+
+            <p>
+
+              {{ item.profissional }}
+
+            </p>
+
+          </div>
+
+          <span class="badge">
+
+            {{ item.hora }}
+
+          </span>
+
+        </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

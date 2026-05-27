@@ -1,0 +1,243 @@
+<div class="profissionais-container">
+
+  <div class="top-area">
+
+    <div>
+
+      <h1>
+        Profissionais
+      </h1>
+
+      <p>
+        Gerencie os profissionais cadastrados
+      </p>
+
+    </div>
+
+    <button
+      class="novo-btn"
+      (click)="abrirModal()">
+
+      <i class="fa-solid fa-plus"></i>
+
+      Novo Profissional
+
+    </button>
+
+  </div>
+
+
+  @if(mensagem){
+
+    <div class="toast">
+
+      <i class="fa-solid fa-circle-check"></i>
+
+      {{ mensagem }}
+
+    </div>
+
+  }
+
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Nome
+          </th>
+
+          <th>
+            Especialidade
+          </th>
+
+          <th>
+            Telefone
+          </th>
+
+          <th>
+            Ações
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+      @for (
+
+      profissional of profissionaisFiltrados;
+
+      track profissional.id
+
+      ){
+
+      <tr>
+
+        <td>
+
+          {{ profissional.nome }}
+
+        </td>
+
+        <td>
+
+          {{ profissional.especialidade }}
+
+        </td>
+
+        <td>
+
+          {{ profissional.telefone }}
+
+        </td>
+
+        <td class="actions">
+
+          <button
+            class="edit-btn"
+            (click)="editarProfissional(profissional)">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Editar
+
+          </button>
+
+          <button
+            class="delete-btn"
+            (click)="excluirProfissional(profissional.id)">
+
+            <i class="fa-solid fa-trash"></i>
+
+            Excluir
+
+          </button>
+
+        </td>
+
+      </tr>
+
+      }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+@if(modalAberto){
+
+<div class="modal-overlay">
+
+<div class="modal">
+
+<h2>
+
+@if(editando){
+
+Editar Profissional
+
+} @else {
+
+Novo Profissional
+
+}
+
+</h2>
+
+<form
+
+[formGroup]="profissionalForm"
+
+(ngSubmit)="adicionarProfissional()"
+
+>
+
+<div class="input-group">
+
+<label>
+
+Nome
+
+</label>
+
+<input
+type="text"
+formControlName="nome">
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+
+Especialidade
+
+</label>
+
+<input
+type="text"
+formControlName="especialidade">
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+
+Telefone
+
+</label>
+
+<input
+type="text"
+formControlName="telefone">
+
+</div>
+
+
+<div class="modal-actions">
+
+<button
+
+type="button"
+
+class="cancel-btn"
+
+(click)="fecharModal()">
+
+Cancelar
+
+</button>
+
+<button
+
+type="submit"
+
+class="save-btn">
+
+Salvar
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+}
