@@ -1,4 +1,5 @@
 <div class="profissionais-container">
+<<<<<<< HEAD
 
   <div class="top-area">
 
@@ -8,11 +9,17 @@
         Profissionais
       </h1>
 
+=======
+  <div class="top-area">
+    <div>
+      <h1>Profissionais</h1>
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
       <p>
         Gerencie os profissionais cadastrados
       </p>
 
     </div>
+<<<<<<< HEAD
 
     <button
       class="novo-btn"
@@ -240,4 +247,135 @@ Salvar
 
 </div>
 
+=======
+    <button
+      class="novo-btn"
+      (click)="abrirModal()"
+    >
+      <i class="fa-solid fa-plus"></i>
+      Novo Profissional
+    </button>
+  </div>
+
+  @if (mensagem) {
+    <div class="toast">
+      <i class="fa-solid fa-circle-check"></i>
+      {{ mensagem }}
+    </div>
+  }
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Especialidade</th>
+          <th>Email</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @for (
+          profissional of profissionais;
+          track profissional
+        ) {
+          <tr>
+            <td>
+              {{ profissional.nome }}
+            </td>
+
+            <td>
+              {{ profissional.especialidade }}
+            </td>
+
+            <td>
+              {{ profissional.email }}
+            </td>
+
+            <td class="actions">
+              <button class="edit-btn">
+                <i class="fa-solid fa-pen"></i>
+                Editar
+              </button>
+              <button
+                class="delete-btn"
+                (click)="excluirProfissional($index)"
+              >
+                <i class="fa-solid fa-trash"></i>
+                Excluir
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (modalAberto) {
+  <div class="modal-overlay">
+    <div class="modal">
+      <h2>
+        Novo Profissional
+      </h2>
+
+      <form
+        [formGroup]="profissionalForm"
+        (ngSubmit)="adicionarProfissional()"
+      >
+
+        <div class="input-group">
+          <label>
+            Nome
+          </label>
+
+          <input
+            type="text"
+            formControlName="nome"
+          >
+        </div>
+
+        <div class="input-group">
+          <label>
+            Especialidade
+          </label>
+
+          <input
+            type="text"
+            formControlName="especialidade"
+          >
+        </div>
+
+        <div class="input-group">
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            formControlName="email"
+          >
+        </div>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="fecharModal()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="save-btn"
+          >
+            Salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

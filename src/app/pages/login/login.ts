@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
+<<<<<<< HEAD
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -147,4 +148,51 @@ err?.error?.message ||
 
 }
 
+=======
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [RouterLink, ReactiveFormsModule],
+  templateUrl: './login.html',
+  styleUrls: ['./login.css']
+})
+export class LoginComponent {
+  loginForm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+
+      senha: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6)
+        ]
+      ]
+
+    });
+
+  }
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    console.log(this.loginForm.value);
+  }
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

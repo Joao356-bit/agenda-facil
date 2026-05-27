@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Component,
   OnInit
@@ -6,6 +7,9 @@ import {
 import {
   CommonModule
 } from '@angular/common';
+=======
+import { Component } from '@angular/core';
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 import {
   FormBuilder,
@@ -14,6 +18,7 @@ import {
   Validators
 } from '@angular/forms';
 
+<<<<<<< HEAD
 import {
   ProfissionalService
 } from '../../services/profissional';
@@ -326,4 +331,89 @@ this.carregarProfissionais();
 
 }
 
+=======
+@Component({
+  selector: 'app-profissionais',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './profissionais.html',
+  styleUrls: ['./profissionais.css']
+})
+export class ProfissionaisComponent {
+  modalAberto = false;
+  mensagem = '';
+  profissionalForm: FormGroup;
+  profissionais = [
+    {
+      nome: 'Dr. João Silva',
+      especialidade: 'Cardiologista',
+      email: 'joao@email.com'
+    },
+
+    {
+      nome: 'Dra. Ana Souza',
+      especialidade: 'Pediatra',
+      email: 'ana@email.com'
+    },
+
+    {
+      nome: 'Dr. Pedro Lima',
+      especialidade: 'Dermatologista',
+      email: 'pedro@email.com'
+    }
+  ];
+
+  constructor(private fb: FormBuilder) {
+    this.profissionalForm = this.fb.group({
+      nome: [
+        '',
+        Validators.required
+      ],
+
+      especialidade: [
+        '',
+        Validators.required
+      ],
+
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ]
+    });
+  }
+
+  abrirModal() {
+    this.modalAberto = true;
+  }
+
+  fecharModal() {
+    this.modalAberto = false;
+    this.profissionalForm.reset();
+  }
+
+  adicionarProfissional() {
+    if (this.profissionalForm.invalid) {
+      this.profissionalForm.markAllAsTouched();
+      return;
+    }
+    this.profissionais.push(
+      this.profissionalForm.value
+    );
+
+    this.mensagem =
+      'Profissional cadastrado com sucesso!';
+    setTimeout(() => {
+      this.mensagem = '';
+    }, 3000);
+    this.fecharModal();
+  }
+
+  excluirProfissional(index: number) {
+    this.profissionais.splice(index, 1);
+
+  }
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

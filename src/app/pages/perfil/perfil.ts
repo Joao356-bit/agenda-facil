@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Component,
   OnInit
@@ -6,6 +7,9 @@ import {
 import {
   CommonModule
 } from '@angular/common';
+=======
+import { Component } from '@angular/core';
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 import {
   FormBuilder,
@@ -14,6 +18,7 @@ import {
   Validators
 } from '@angular/forms';
 
+<<<<<<< HEAD
 import {
   PerfilService
 } from '../../services/perfil';
@@ -74,12 +79,33 @@ implements OnInit{
 
       email:[
         '',
+=======
+@Component({
+  selector: 'app-perfil',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './perfil.html',
+  styleUrls: ['./perfil.css']
+})
+export class PerfilComponent {
+  perfilForm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.perfilForm = this.fb.group({
+      nome: [
+        'João Luiz',
+        Validators.required
+      ],
+
+      email: [
+        'joao@email.com',
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
         [
           Validators.required,
           Validators.email
         ]
       ],
 
+<<<<<<< HEAD
       senhaAtual:[''],
 
       novaSenha:[''],
@@ -245,4 +271,22 @@ implements OnInit{
 
   }
 
+=======
+      senhaAtual: [''],
+
+      novaSenha: ['']
+    });
+  }
+
+  salvarPerfil() {
+    if (this.perfilForm.invalid) {
+      this.perfilForm.markAllAsTouched();
+      return;
+    }
+
+    console.log(
+      this.perfilForm.value
+    );
+  }
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
+<<<<<<< HEAD
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -13,10 +14,18 @@ import {
 } from '@angular/router';
 
 import { AuthService } from '../../services/auth';
+=======
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
+import { RouterLink } from '@angular/router';
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
+<<<<<<< HEAD
   imports: [
     ReactiveFormsModule,
     RouterLink
@@ -43,6 +52,21 @@ export class CadastroComponent {
         '',
         [
           Validators.required
+=======
+  imports: [RouterLink, ReactiveFormsModule],
+  templateUrl: './cadastro.html',
+  styleUrls: ['./cadastro.css']
+})
+export class CadastroComponent {
+  cadastroForm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.cadastroForm = this.fb.group({
+      nome: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3)
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
         ]
       ],
 
@@ -60,6 +84,7 @@ export class CadastroComponent {
           Validators.required,
           Validators.minLength(6)
         ]
+<<<<<<< HEAD
       ]
 
     });
@@ -121,4 +146,24 @@ export class CadastroComponent {
 
   }
 
+=======
+      ],
+
+      confirmarSenha: [
+        '',
+        [
+          Validators.required
+        ]
+      ]
+    });
+  }
+
+  onSubmit() {
+    if (this.cadastroForm.invalid) {
+      this.cadastroForm.markAllAsTouched();
+      return;
+    }
+    console.log(this.cadastroForm.value);
+  }
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Component,
   OnInit
@@ -84,4 +85,16 @@ implements OnInit {
 
   }
 
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-dashboard',
+  imports: [],
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css',
+})
+export class DashboardComponent {
+  
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

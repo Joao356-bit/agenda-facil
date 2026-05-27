@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Component,
   OnInit
@@ -147,5 +148,18 @@ this.confirmacaoService
 .fechar();
 
 }
+=======
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-layout',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet],
+  templateUrl: './layout.html',
+  styleUrls: ['./layout.css']
+})
+export class LayoutComponent {
+>>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 }
