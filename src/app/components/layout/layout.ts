@@ -1,11 +1,13 @@
-<<<<<<< HEAD
 import {
   Component,
   OnInit
 } from '@angular/core';
 
 import {
-  Router,
+  CommonModule
+} from '@angular/common';
+
+import {
   RouterModule
 } from '@angular/router';
 
@@ -31,135 +33,177 @@ import {
 
 @Component({
 
-selector:'app-layout',
+  selector:'app-layout',
 
-standalone:true,
+  standalone:true,
 
-imports:[
-RouterModule,
-FormsModule
-],
+  imports:[
+    CommonModule,
+    RouterModule,
+    FormsModule
+  ],
 
-templateUrl:'./layout.html',
+  templateUrl:'./layout.html',
 
-styleUrls:[
-'./layout.css'
-]
+  styleUrls:[
+    './layout.css'
+  ]
 
 })
 
 export class LayoutComponent
 implements OnInit{
 
-textoBusca='';
+  textoBusca='';
 
-mensagem='';
+  mensagem='';
 
-confirmacao:any=null;
+  confirmacao:any=null;
 
-constructor(
+  usuarioNome='Usuário';
 
-private authService:
-AuthService,
+  usuarioFoto='';
 
-private router:
-Router,
+  constructor(
 
-private buscaService:
-BuscaService,
+    private authService:
+    AuthService,
 
-private notificacaoService:
-NotificacaoService,
+    private buscaService:
+    BuscaService,
 
-private confirmacaoService:
-ConfirmacaoService
+    private notificacaoService:
+    NotificacaoService,
 
-){}
+    private confirmacaoService:
+    ConfirmacaoService
 
-ngOnInit():void{
+  ){}
 
-this.notificacaoService
-.mensagem$
-.subscribe({
+  ngOnInit():void{
 
-next:(mensagem)=>{
+    this.notificacaoService
 
-this.mensagem=
-mensagem;
+    .mensagem$
 
-}
+    .subscribe({
 
-});
+      next:(mensagem:string)=>{
 
-this.confirmacaoService
-.estado$
-.subscribe({
+        this.mensagem=
+        mensagem;
 
-next:(estado)=>{
+      }
 
-this.confirmacao=
-estado;
+    });
 
-}
+    this.confirmacaoService
 
-});
+    .estado$
 
-}
+    .subscribe({
 
-logout():void{
+      next:(estado:any)=>{
 
-this.authService
-.logout();
+        this.confirmacao=
+        estado;
 
-}
+      }
 
-buscar():void{
+    });
 
-this.buscaService
-.atualizarBusca(
+    this.carregarUsuario();
 
-this.textoBusca
+  }
 
-);
+  carregarUsuario():void{
 
-}
+  this.usuarioNome =
 
-confirmar():void{
+  localStorage.getItem(
+    'usuarioNome'
+  ) || 'Usuário';
 
-if(
+  const foto =
 
-this.confirmacao
-?.callback
+  localStorage.getItem(
+    'usuarioFoto'
+  );
 
-){
+  console.log(
+    'NOME:',
+    this.usuarioNome
+  );
 
-this.confirmacao
-.callback();
+  console.log(
+    'FOTO:',
+    foto
+  );
 
-}
+  if(foto){
 
-this.fecharModal();
+    this.usuarioFoto =
 
-}
+    `http://localhost:3000/${foto}?t=${Date.now()}`;
 
-fecharModal():void{
-
-this.confirmacaoService
-.fechar();
+  }
 
 }
-=======
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 
-@Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [RouterLink, RouterOutlet],
-  templateUrl: './layout.html',
-  styleUrls: ['./layout.css']
-})
-export class LayoutComponent {
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+  logout():void{
+
+    localStorage.removeItem(
+
+      'usuarioNome'
+
+    );
+
+    localStorage.removeItem(
+
+      'usuarioFoto'
+
+    );
+
+    this.authService
+    .logout();
+
+  }
+
+  buscar():void{
+
+    this.buscaService
+
+    .atualizarBusca(
+
+      this.textoBusca
+
+    );
+
+  }
+
+  confirmar():void{
+
+    if(
+
+      this.confirmacao
+      ?.callback
+
+    ){
+
+      this.confirmacao
+      .callback();
+
+    }
+
+    this.fecharModal();
+
+  }
+
+  fecharModal():void{
+
+    this.confirmacaoService
+    .fechar();
+
+  }
 
 }

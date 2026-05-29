@@ -1,119 +1,109 @@
-import { Routes } from '@angular/router';
+import {
+  Routes
+} from '@angular/router';
 
-import { LoginComponent } from './pages/login/login';
-import { CadastroComponent } from './pages/cadastro/cadastro';
-import { DashboardComponent } from './pages/dashboard/dashboard';
-import { ProfissionaisComponent } from './pages/profissionais/profissionais';
-import { AgendaComponent } from './pages/agenda/agenda';
-import { PerfilComponent } from './pages/perfil/perfil';
-import { NovoAgendamentoComponent } from './pages/novo-agendamento/novo-agendamento';
-import { NotFoundComponent } from './pages/not-found/not-found';
-import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha';
+import {
+  LoginComponent
+} from './pages/login/login';
 
-import { LayoutComponent } from './components/layout/layout';
-<<<<<<< HEAD
-import { authGuard } from './guards/auth-guard';
+import {
+  CadastroComponent
+} from './pages/cadastro/cadastro';
 
-export const routes: Routes = [
+import {
+  LayoutComponent
+} from './components/layout/layout';
+
+import {
+  DashboardComponent
+} from './pages/dashboard/dashboard';
+
+import {
+  ProfissionaisComponent
+} from './pages/profissionais/profissionais';
+
+import {
+  AgendaComponent
+} from './pages/agenda/agenda';
+
+import {
+  NovoAgendamentoComponent
+} from './pages/novo-agendamento/novo-agendamento';
+
+import {
+  PerfilComponent
+} from './pages/perfil/perfil';
+
+import {
+  authGuard
+} from './guards/auth.guard';
+
+export const appRoutes:
+Routes = [
 
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+
+    path:'',
+    component:LoginComponent
+
   },
 
   {
-    path: 'login',
-=======
 
-export const routes: Routes = [
-  {
-    path: '',
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-    component: LoginComponent
+    path:'cadastro',
+    component:CadastroComponent
+
   },
 
   {
-    path: 'cadastro',
-    component: CadastroComponent
-  },
 
-  {
-    path: 'esqueci-senha',
-    component: EsqueciSenhaComponent
-  },
+    path:'',
 
-  {
-    path: '',
-    component: LayoutComponent,
-<<<<<<< HEAD
+    component:LayoutComponent,
 
-    children: [
+    canActivate:[
+      authGuard
+    ],
+
+    children:[
 
       {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [authGuard]
-=======
-    children: [
-      {
-        path: 'dashboard',
-        component: DashboardComponent
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
+        path:'dashboard',
+        component:DashboardComponent
+
       },
 
       {
-        path: 'profissionais',
-<<<<<<< HEAD
-        component: ProfissionaisComponent,
-        canActivate: [authGuard]
-=======
-        component: ProfissionaisComponent
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
+        path:'profissionais',
+        component:ProfissionaisComponent
+
       },
 
       {
-        path: 'agenda',
-<<<<<<< HEAD
-        component: AgendaComponent,
-        canActivate: [authGuard]
-=======
-        component: AgendaComponent
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
+        path:'agenda',
+        component:AgendaComponent
+
       },
 
       {
-        path: 'novo-agendamento',
-<<<<<<< HEAD
-        component: NovoAgendamentoComponent,
-        canActivate: [authGuard]
-=======
-        component: NovoAgendamentoComponent
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
+        path:'novo-agendamento',
+        component:NovoAgendamentoComponent
+
       },
 
       {
-        path: 'perfil',
-<<<<<<< HEAD
-        component: PerfilComponent,
-        canActivate: [authGuard]
+
+        path:'perfil',
+        component:PerfilComponent
+
       }
 
     ]
-=======
-        component: PerfilComponent
-      }
-    ]
 
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-  },
-
-  {
-    path: '**',
-    component: NotFoundComponent
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 ];

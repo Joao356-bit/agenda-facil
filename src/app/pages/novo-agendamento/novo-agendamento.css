@@ -73,3 +73,34 @@
     padding: 20px;
   }
 }
+
+.novo-btn {
+  padding: 14px 22px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background-color: #243bff;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.novo-btn:hover {
+  opacity: 0.92;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 20px;
+}

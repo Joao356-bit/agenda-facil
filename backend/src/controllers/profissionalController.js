@@ -2,31 +2,18 @@ const db = require('../database/database');
 
 exports.listar = (req, res) => {
 
-<<<<<<< HEAD
-    const sql = `
-        SELECT
-            id,
-            nome,
-            especialista AS especialidade,
-            telefone
-        FROM profissionais
-    `;
+    const sql =
+    'SELECT * FROM profissionais ORDER BY nome';
 
-    db.all(sql, [], (err, rows) => {
-
-        if (err) {
-=======
-    const sql = 'SELECT * FROM profissionais';
-
-    db.all(sql, [], (err, rows) => {
+    db.all(sql, [], (err, profissionais) => {
 
         if(err){
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
             return res.status(500).json(err);
+
         }
 
-        return res.json(rows);
-<<<<<<< HEAD
+        return res.json(profissionais);
 
     });
 
@@ -40,15 +27,11 @@ exports.criar = (req, res) => {
         telefone
     } = req.body;
 
-    const sql = `
-        INSERT INTO profissionais
-        (
-            nome,
-            especialista,
-            telefone
-        )
-        VALUES (?, ?, ?)
-    `;
+    const sql =
+
+    `INSERT INTO profissionais
+    (nome,especialidade,telefone)
+    VALUES (?,?,?)`;
 
     db.run(
 
@@ -64,17 +47,11 @@ exports.criar = (req, res) => {
 
             if(err){
 
-                console.log(err);
-
-                return res
-                .status(500)
-                .json(err);
+                return res.status(500).json(err);
 
             }
 
-            return res
-            .status(201)
-            .json({
+            return res.json({
 
                 success:true,
                 id:this.lastID
@@ -87,9 +64,7 @@ exports.criar = (req, res) => {
 
 };
 
-exports.editar = (req,res)=>{
-
-    const { id } = req.params;
+exports.atualizar = (req, res) => {
 
     const {
         nome,
@@ -97,14 +72,14 @@ exports.editar = (req,res)=>{
         telefone
     } = req.body;
 
-    const sql = `
-        UPDATE profissionais
-        SET
-            nome=?,
-            especialista=?,
-            telefone=?
-        WHERE id=?
-    `;
+    const sql =
+
+    `UPDATE profissionais
+    SET
+    nome=?,
+    especialidade=?,
+    telefone=?
+    WHERE id=?`;
 
     db.run(
 
@@ -114,23 +89,20 @@ exports.editar = (req,res)=>{
             nome,
             especialidade,
             telefone,
-            id
+            req.params.id
         ],
 
         function(err){
 
             if(err){
 
-                return res
-                .status(500)
-                .json(err);
+                return res.status(500).json(err);
 
             }
 
             return res.json({
 
-                success:true,
-                message:'Profissional atualizado'
+                success:true
 
             });
 
@@ -140,9 +112,7 @@ exports.editar = (req,res)=>{
 
 };
 
-exports.excluir = (req,res)=>{
-
-    const { id } = req.params;
+exports.excluir = (req, res) => {
 
     const sql =
     'DELETE FROM profissionais WHERE id=?';
@@ -151,22 +121,19 @@ exports.excluir = (req,res)=>{
 
         sql,
 
-        [id],
+        [req.params.id],
 
         function(err){
 
             if(err){
 
-                return res
-                .status(500)
-                .json(err);
+                return res.status(500).json(err);
 
             }
 
             return res.json({
 
-                success:true,
-                message:'Profissional removido'
+                success:true
 
             });
 
@@ -175,30 +142,3 @@ exports.excluir = (req,res)=>{
     );
 
 };
-=======
-    });
-}
-
-exports.criar = (req, res) => {
-
-    const { nome, especialidade, telefone } = req.body;
-
-    const sql = `
-        INSERT INTO profissionais
-        (nome, especialidade, telefone)
-        VALUES (?, ?, ?)
-    `;
-
-    db.run(sql, [nome, especialidade, telefone], function(err){
-
-        if(err){
-            return res.status(500).json(err);
-        }
-
-        return res.status(201).json({
-            success: true,
-            id: this.lastID
-        });
-    });
-}
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10

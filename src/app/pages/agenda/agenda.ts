@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -9,242 +9,115 @@ import {
 } from '@angular/common';
 
 import {
-  Router
+  RouterModule
 } from '@angular/router';
 
 import {
   AgendamentoService
 } from '../../services/agendamento';
 
-import {
-  BuscaService
-} from '../../services/busca';
-
 @Component({
 
-selector:'app-agenda',
+  selector:'app-agenda',
 
-standalone:true,
+  standalone:true,
 
-imports:[
-CommonModule
-],
+  imports:[
+    CommonModule,
+    RouterModule
+  ],
 
-templateUrl:'./agenda.html',
+  templateUrl:'./agenda.html',
 
-styleUrls:[
-'./agenda.css'
-]
+  styleUrls:[
+    './agenda.css'
+  ]
 
 })
 
 export class AgendaComponent
 implements OnInit{
 
-diaSelecionado=
-'Agendamentos';
+  agendamentos:any[]=[];
 
-horarios:any[]=[];
+  constructor(
 
-horariosFiltrados:any[]=[];
+    private agendamentoService:
+    AgendamentoService,
 
-constructor(
+    private cdr:
+    ChangeDetectorRef
 
-private router:
-Router,
+  ){}
 
-private agendamentoService:
-AgendamentoService,
+  ngOnInit():void{
 
-private buscaService:
-BuscaService
+    this.carregarAgendamentos();
 
-){}
+  }
 
-ngOnInit():void{
+  carregarAgendamentos():void{
 
-this.carregarAgendamentos();
+    this.agendamentoService
 
-this.buscaService
-.busca$
-.subscribe({
+    .listar()
 
-next:(texto)=>{
+    .subscribe({
 
-this.filtrar(
-texto
-);
+      next:(resposta:any)=>{
 
-}
+        this.agendamentos=[
+          ...resposta
+        ];
 
-});
+        this.cdr.detectChanges();
 
-}
+      },
 
-carregarAgendamentos():void{
+      error:(err:any)=>{
 
-this.agendamentoService
-.listar()
+        console.error(err);
 
-.subscribe({
+      }
 
-next:(dados:any)=>{
+    });
 
-this.horarios=
-dados;
+  }
 
-this.horariosFiltrados=
-dados;
+  excluirAgendamento(
+    id:number
+  ):void{
 
-},
+    this.agendamentoService
 
-error:(err)=>{
+    .excluir(id)
 
-console.error(
-err
-);
+    .subscribe({
 
-}
+      next:()=>{
 
-});
+        this.agendamentos=
 
-}
+        this.agendamentos.filter(
 
-filtrar(
-texto:string
-):void{
+          agendamento=>
 
-texto=
-texto
-.toLowerCase();
+          agendamento.id !== id
 
-this.horariosFiltrados=
+        );
 
-this.horarios.filter(
+        this.cdr.detectChanges();
 
-(item:any)=>
+      },
 
-item.cliente
-?.toLowerCase()
-.includes(texto)
+      error:(err:any)=>{
 
-||
+        console.error(err);
 
-item.profissional
-?.toLowerCase()
-.includes(texto)
+      }
 
-||
+    });
 
-item.servico
-?.toLowerCase()
-.includes(texto)
+  }
 
-);
-
-}
-
-novoAgendamento():void{
-
-this.router.navigate([
-
-'/novo-agendamento'
-
-]);
-
-}
-
-editarAgendamento(
-id:number
-):void{
-
-this.router.navigate([
-
-'/novo-agendamento'
-
-],{
-
-queryParams:{
-id:id
-}
-
-});
-
-}
-
-excluirAgendamento(
-id:number
-):void{
-
-if(
-
-!confirm(
-
-'Deseja excluir este agendamento?'
-
-)
-
-){
-
-return;
-
-}
-
-this.agendamentoService
-.excluir(
-id
-)
-
-.subscribe({
-
-next:()=>{
-
-this.carregarAgendamentos();
-
-},
-
-error:(err)=>{
-
-console.error(
-err
-);
-
-}
-
-});
-
-}
-
-=======
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-agenda',
-  standalone: true,
-  imports: [],
-  templateUrl: './agenda.html',
-  styleUrls: ['./agenda.css']
-})
-export class AgendaComponent {
-  diaSelecionado = '18 Maio 2026';
-  horarios = [
-    {
-      hora: '08:00',
-      cliente: 'João Silva',
-      profissional: 'Dr. Pedro'
-    },
-
-    {
-      hora: '10:00',
-      cliente: 'Maria Souza',
-      profissional: 'Dra. Ana'
-    },
-
-    {
-      hora: '14:00',
-      cliente: 'Carlos Mendes',
-      profissional: 'Dr. João'
-    }
-  ];
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

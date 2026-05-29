@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {
+  Component
+} from '@angular/core';
 
 import {
   FormBuilder,
   FormGroup,
-<<<<<<< HEAD
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -14,185 +15,167 @@ import {
 } from '@angular/router';
 
 import {
+  CommonModule
+} from '@angular/common';
+
+import {
   AuthService
 } from '../../services/auth';
 
 @Component({
 
-selector:'app-login',
+  selector:'app-login',
 
-standalone:true,
+  standalone:true,
 
-imports:[
-RouterLink,
-ReactiveFormsModule
-],
+  imports:[
+    CommonModule,
+    RouterLink,
+    ReactiveFormsModule
+  ],
 
-templateUrl:'./login.html',
+  templateUrl:'./login.html',
 
-styleUrls:[
-'./login.css'
-]
+  styleUrls:[
+    './login.css'
+  ]
 
 })
 
 export class LoginComponent {
 
-loginForm:FormGroup;
+  loginForm:FormGroup;
 
-constructor(
+  carregando=false;
 
-private fb:FormBuilder,
+  constructor(
 
-private authService:AuthService,
+    private fb:FormBuilder,
 
-private router:Router
+    private authService:AuthService,
 
-){
+    private router:Router
 
-this.loginForm=
+  ){
 
-this.fb.group({
+    this.loginForm=
 
-email:[
+    this.fb.group({
 
-'',
+      email:[
 
-[
-Validators.required,
-Validators.email
-]
-
-],
-
-senha:[
-
-'',
-
-[
-Validators.required,
-Validators.minLength(6)
-]
-
-]
-
-});
-
-}
-
-onSubmit():void{
-
-if(
-
-this.loginForm.invalid
-
-){
-
-this.loginForm
-.markAllAsTouched();
-
-return;
-
-}
-
-const{
-
-email,
-senha
-
-}=
-
-this.loginForm.value;
-
-this.authService
-.login(
-
-email,
-senha
-
-)
-
-.subscribe({
-
-next:()=>{
-
-this.router.navigate([
-
-'/dashboard'
-
-]);
-
-},
-
-error:(err:any)=>{
-
-console.error(
-
-'Erro no login:',
-
-err
-
-);
-
-alert(
-
-err?.error?.message ||
-
-'Erro ao fazer login'
-
-);
-
-}
-
-});
-
-}
-
-=======
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-
-import { RouterLink } from '@angular/router';
-
-@Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './login.html',
-  styleUrls: ['./login.css']
-})
-export class LoginComponent {
-  loginForm: FormGroup;
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      email: [
         '',
+
         [
+
           Validators.required,
           Validators.email
+
         ]
+
       ],
 
-      senha: [
+      senha:[
+
         '',
+
         [
+
           Validators.required,
           Validators.minLength(6)
+
         ]
+
       ]
 
     });
 
   }
 
-  onSubmit() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+  onSubmit():void{
+
+    if(
+
+      this.loginForm.invalid
+
+    ){
+
+      this.loginForm
+      .markAllAsTouched();
+
       return;
+
     }
 
-    console.log(this.loginForm.value);
+    this.carregando=true;
+
+    const {
+
+      email,
+      senha
+
+    }=
+
+    this.loginForm.value;
+
+    this.authService
+
+    .login(
+
+      email,
+      senha
+
+    )
+
+    .subscribe({
+
+      next:(response:any)=>{
+
+  console.log(
+    'LOGIN RESPONSE:',
+    response
+  );
+
+  this.router.navigate([
+    '/dashboard'
+  ]);
+
+},
+
+      error:(err:any)=>{
+
+        console.error(
+
+          'Erro no login:',
+
+          err
+
+        );
+
+        alert(
+
+          err?.error?.message ||
+
+          'Erro ao fazer login'
+
+        );
+
+        this.carregando=false;
+
+      }
+
+    });
+
   }
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
+  esqueciSenha():void{
+
+    alert(
+
+      'Funcionalidade em desenvolvimento'
+
+    );
+
+  }
+
 }

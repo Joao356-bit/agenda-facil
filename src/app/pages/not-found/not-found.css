@@ -1,69 +1,172 @@
 .not-found-container {
   min-height: 100vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f4f6fb;
+
   padding: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4f7fb 0%,
+      #eef2ff 100%
+    );
+
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+/* CARD */
 
 .not-found-card {
   width: 100%;
-  max-width: 600px;
-  background-color: white;
-  padding: 50px;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  max-width: 650px;
+
+  background: white;
+
+  padding: 55px;
+
+  border-radius: 30px;
+
+  border: 1px solid #edf0f6;
+
+  box-shadow:
+    0 16px 45px rgba(0,0,0,0.06);
+
   text-align: center;
-  animation: fadeUp 0.5s ease;
+
+  animation: fadeUp 0.45s ease;
 }
+
+/* ERROR CODE */
 
 .error-code {
-  font-size: 90px;
-  font-weight: bold;
-  color: #243bff;
-  margin-bottom: 10px;
+  font-size: 110px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  margin-bottom: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #243bff 0%,
+      #1a2dcc 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 }
 
+/* TEXT */
+
 .not-found-card h1 {
-  font-size: 36px;
-  color: #222;
-  margin-bottom: 15px;
+  font-size: 40px;
+
+  color: #1f1f1f;
+
+  margin-bottom: 18px;
+
+  font-weight: 700;
 }
 
 .not-found-card p {
-  color: #777;
-  margin-bottom: 30px;
+  color: #7b8190;
+
+  margin-bottom: 35px;
+
+  line-height: 1.7;
+
+  font-size: 16px;
 }
 
+/* IMAGE */
+
 .not-found-card img {
-  width: 220px;
-  margin-bottom: 30px;
+  width: 240px;
+
+  margin-bottom: 35px;
+
+  filter:
+    drop-shadow(
+      0 12px 25px rgba(0,0,0,0.10)
+    );
 }
+
+/* BUTTON */
 
 .back-btn {
   display: inline-block;
-  padding: 14px 24px;
-  background-color: #243bff;
+
+  padding: 15px 26px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #243bff 0%,
+      #1a2dcc 100%
+    );
+
   color: white;
+
   text-decoration: none;
-  border-radius: 10px;
+
+  border-radius: 14px;
+
   font-weight: 600;
-  transition: 0.3s;
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 10px 20px rgba(36,59,255,0.16);
 }
 
 .back-btn:hover {
-  opacity: 0.92;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 24px rgba(36,59,255,0.22);
 }
 
+/* ANIMATION */
+
 @keyframes fadeUp {
+
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(25px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
   }
+
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+
+  .not-found-card {
+    padding: 40px 30px;
+  }
+
+  .error-code {
+    font-size: 82px;
+  }
+
+  .not-found-card h1 {
+    font-size: 32px;
+  }
+
+  .not-found-card img {
+    width: 180px;
+  }
+
 }

@@ -60,7 +60,7 @@ senha
 
 tap(
 
-(resposta)=>{
+(resposta:any)=>{
 
 if(
 
@@ -73,6 +73,30 @@ this.salvarToken(
 resposta.token
 
 );
+
+if(
+
+resposta.usuario
+
+){
+
+localStorage.setItem(
+
+'usuarioNome',
+
+resposta.usuario.nome || ''
+
+);
+
+localStorage.setItem(
+
+'usuarioFoto',
+
+resposta.usuario.foto || ''
+
+);
+
+}
 
 }
 

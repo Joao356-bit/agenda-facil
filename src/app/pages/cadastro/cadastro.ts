@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-<<<<<<< HEAD
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -13,157 +12,145 @@ import {
   RouterLink
 } from '@angular/router';
 
-import { AuthService } from '../../services/auth';
-=======
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-
-import { RouterLink } from '@angular/router';
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+import {
+  AuthService
+} from '../../services/auth';
 
 @Component({
-  selector: 'app-cadastro',
-  standalone: true,
-<<<<<<< HEAD
-  imports: [
-    ReactiveFormsModule,
-    RouterLink
+
+  selector:'app-cadastro',
+
+  standalone:true,
+
+  imports:[
+    RouterLink,
+    ReactiveFormsModule
   ],
-  templateUrl: './cadastro.html',
-  styleUrls: ['./cadastro.css']
+
+  templateUrl:'./cadastro.html',
+
+  styleUrls:[
+    './cadastro.css'
+  ]
+
 })
 
 export class CadastroComponent {
 
-  cadastroForm: FormGroup;
+  cadastroForm:FormGroup;
 
   constructor(
 
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private fb:FormBuilder,
 
-  ) {
+    private authService:AuthService,
 
-    this.cadastroForm = this.fb.group({
+    private router:Router
 
-      nome: [
+  ){
+
+    this.cadastroForm=
+
+    this.fb.group({
+
+      nome:[
+
         '',
+
         [
+
           Validators.required
-=======
-  imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './cadastro.html',
-  styleUrls: ['./cadastro.css']
-})
-export class CadastroComponent {
-  cadastroForm: FormGroup;
-  constructor(private fb: FormBuilder) {
-    this.cadastroForm = this.fb.group({
-      nome: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3)
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
         ]
+
       ],
 
-      email: [
+      email:[
+
         '',
+
         [
+
           Validators.required,
           Validators.email
+
         ]
+
       ],
 
-      senha: [
+      senha:[
+
         '',
+
         [
+
           Validators.required,
           Validators.minLength(6)
+
         ]
-<<<<<<< HEAD
+
       ]
 
     });
 
   }
 
-  onSubmit(): void {
+  onSubmit():void{
 
-    if (this.cadastroForm.invalid) {
+    if(
 
-      this.cadastroForm.markAllAsTouched();
+      this.cadastroForm.invalid
+
+    ){
+
+      this.cadastroForm
+      .markAllAsTouched();
+
       return;
 
     }
 
     const {
+
       nome,
       email,
       senha
-    } = this.cadastroForm.value;
+
+    }=
+
+    this.cadastroForm.value;
 
     this.authService
-      .register(
-        nome,
-        email,
-        senha
-      )
-      .subscribe({
+    .register(
 
-        next: () => {
+      nome,
+      email,
+      senha
 
-          alert(
-            'Usuário criado com sucesso'
-          );
+    )
 
-          this.router.navigate([
-            '/login'
-          ]);
+    .subscribe({
 
-        },
+      next:()=>{
 
-        error: (err: any) => {
+        alert(
+          'Cadastro realizado'
+        );
 
-          console.error(
-            'Erro:',
-            err
-          );
+        this.router.navigate([
+          '/'
+        ]);
 
-          alert(
+      },
 
-            err?.error?.message ||
-            'Erro ao cadastrar'
+      error:(err:any)=>{
 
-          );
+        console.error(err);
 
-        }
+      }
 
-      });
-
-  }
-
-=======
-      ],
-
-      confirmarSenha: [
-        '',
-        [
-          Validators.required
-        ]
-      ]
     });
+
   }
 
-  onSubmit() {
-    if (this.cadastroForm.invalid) {
-      this.cadastroForm.markAllAsTouched();
-      return;
-    }
-    console.log(this.cadastroForm.value);
-  }
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

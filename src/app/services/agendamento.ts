@@ -1,13 +1,24 @@
-import { Injectable, inject } from '@angular/core';
+import {
+  Injectable,
+  inject
+} from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient
+} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import {
+  Observable
+} from 'rxjs';
 
-import { AuthService } from './auth';
+import {
+  AuthService
+} from './auth';
 
 @Injectable({
-  providedIn: 'root'
+
+  providedIn:'root'
+
 })
 
 export class AgendamentoService {
@@ -21,7 +32,8 @@ export class AgendamentoService {
   private apiUrl =
   'http://localhost:3000/agendamentos';
 
-  listar(): Observable<any> {
+  listar():
+  Observable<any>{
 
     return this.http.get(
 
@@ -37,10 +49,15 @@ export class AgendamentoService {
   criar(
 
     cliente:string,
-    profissional_id:number,
-    servico:string,
+
     data:string,
+
     hora:string,
+
+    servico:string,
+
+    profissional_id:number,
+
     observacoes:string
 
   ){
@@ -50,12 +67,14 @@ export class AgendamentoService {
       this.apiUrl,
 
       {
+
         cliente,
-        profissional_id,
-        servico,
         data,
         hora,
+        servico,
+        profissional_id,
         observacoes
+
       },
 
       this.authService
@@ -65,16 +84,38 @@ export class AgendamentoService {
 
   }
 
-  editar(
+  atualizar(
+
     id:number,
-    dados:any
+
+    cliente:string,
+
+    data:string,
+
+    hora:string,
+
+    servico:string,
+
+    profissional_id:number,
+
+    observacoes:string
+
   ){
 
     return this.http.put(
 
       `${this.apiUrl}/${id}`,
 
-      dados,
+      {
+
+        cliente,
+        data,
+        hora,
+        servico,
+        profissional_id,
+        observacoes
+
+      },
 
       this.authService
       .getAuthHeaders()

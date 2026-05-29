@@ -20,17 +20,18 @@ CanActivateFn = () => {
   const router =
   inject(Router);
 
-  if (
-    authService.isAuthenticated()
-  ) {
+  if(
+
+    authService
+    .isAuthenticated()
+
+  ){
 
     return true;
 
   }
 
-  router.navigate(
-    ['/']
-  );
+  router.navigate(['/']);
 
   return false;
 

@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -31,7 +31,7 @@ import {
 })
 
 export class DashboardComponent
-implements OnInit {
+implements OnInit{
 
   dados:any={
 
@@ -44,7 +44,10 @@ implements OnInit {
   constructor(
 
     private dashboardService:
-    DashboardService
+    DashboardService,
+
+    private cdr:
+    ChangeDetectorRef
 
   ){}
 
@@ -57,27 +60,24 @@ implements OnInit {
   carregarDashboard():void{
 
     this.dashboardService
+
     .resumo()
 
     .subscribe({
 
       next:(resposta:any)=>{
 
-        console.log(
-          'Dashboard:',
-          resposta
-        );
+        this.dados={
+          ...resposta
+        };
 
-        this.dados=
-        resposta;
+        this.cdr.detectChanges();
 
       },
 
       error:(err:any)=>{
 
-        console.error(
-          err
-        );
+        console.error(err);
 
       }
 
@@ -85,16 +85,4 @@ implements OnInit {
 
   }
 
-=======
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-dashboard',
-  imports: [],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
-})
-export class DashboardComponent {
-  
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

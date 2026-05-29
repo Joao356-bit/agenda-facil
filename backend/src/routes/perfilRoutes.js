@@ -1,30 +1,21 @@
 const express = require('express');
-<<<<<<< HEAD
-const multer = require('multer');
 
 const router = express.Router();
+
+const multer = require('multer');
+
+const path = require('path');
 
 const perfilController =
 require('../controllers/perfilController');
 
 const authMiddleware =
 require('../middlewares/authMiddleware');
-=======
-
-const router = express.Router();
-
-const perfilController = require('../controllers/perfilController');
-const authMiddleware = require('../middlewares/authMiddleware');
-
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 router.use(authMiddleware);
 
-
-<<<<<<< HEAD
-// Configuração upload
-
-const storage = multer.diskStorage({
+const storage =
+multer.diskStorage({
 
     destination:(req,file,cb)=>{
 
@@ -37,21 +28,15 @@ const storage = multer.diskStorage({
 
     filename:(req,file,cb)=>{
 
-        const nome=
-
-        Date.now()
-
-        +
-
-        '-'
-
-        +
-
-        file.originalname;
-
         cb(
+
             null,
-            nome
+
+            Date.now() +
+            path.extname(
+                file.originalname
+            )
+
         );
 
     }
@@ -60,39 +45,58 @@ const storage = multer.diskStorage({
 
 const upload =
 multer({
+
     storage
+
 });
 
-
-// ROTAS
-
 router.get(
-'/',
-perfilController.buscar
+
+    '/',
+
+    perfilController.buscar
+
 );
 
 router.put(
-'/',
-perfilController.atualizar
+
+    '/',
+
+    perfilController.atualizar
+
 );
 
 router.post(
 
-'/foto',
+    '/foto',
 
-upload.single(
-'foto'
-),
+    upload.single('foto'),
 
-perfilController.uploadFoto
+    (req,res)=>{
+
+        console.log(req.file);
+
+        if(!req.file){
+
+            return res.status(400).json({
+
+                success:false
+
+            });
+
+        }
+
+        return res.json({
+
+            success:true,
+
+            caminho:
+            `uploads/${req.file.filename}`
+
+        });
+
+    }
 
 );
-=======
-router.get('/', perfilController.buscar);
-
-
-router.put('/', perfilController.atualizar);
-
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 module.exports = router;

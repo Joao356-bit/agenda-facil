@@ -1,15 +1,12 @@
-<<<<<<< HEAD
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
   CommonModule
 } from '@angular/common';
-=======
-import { Component } from '@angular/core';
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 import {
   FormBuilder,
@@ -18,14 +15,9 @@ import {
   Validators
 } from '@angular/forms';
 
-<<<<<<< HEAD
 import {
   PerfilService
 } from '../../services/perfil';
-
-import {
-  NotificacaoService
-} from '../../services/notificacao';
 
 @Component({
 
@@ -61,8 +53,8 @@ implements OnInit{
     private perfilService:
     PerfilService,
 
-    private notificacaoService:
-    NotificacaoService
+    private cdr:
+    ChangeDetectorRef
 
   ){}
 
@@ -79,38 +71,23 @@ implements OnInit{
 
       email:[
         '',
-=======
-@Component({
-  selector: 'app-perfil',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './perfil.html',
-  styleUrls: ['./perfil.css']
-})
-export class PerfilComponent {
-  perfilForm: FormGroup;
-  constructor(private fb: FormBuilder) {
-    this.perfilForm = this.fb.group({
-      nome: [
-        'João Luiz',
-        Validators.required
-      ],
-
-      email: [
-        'joao@email.com',
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
         [
           Validators.required,
           Validators.email
         ]
       ],
 
-<<<<<<< HEAD
-      senhaAtual:[''],
+      senhaAtual:[
+        ''
+      ],
 
-      novaSenha:[''],
+      novaSenha:[
+        ''
+      ],
 
-      foto:['']
+      foto:[
+        ''
+      ]
 
     });
 
@@ -121,14 +98,14 @@ export class PerfilComponent {
   carregarPerfil():void{
 
     this.perfilService
+
     .buscar()
 
     .subscribe({
 
       next:(usuario:any)=>{
 
-        this.perfilForm
-        .patchValue({
+        this.perfilForm.patchValue({
 
           nome:
           usuario.nome,
@@ -141,13 +118,31 @@ export class PerfilComponent {
 
         });
 
+        localStorage.setItem(
+
+          'usuarioNome',
+
+          usuario.nome
+
+        );
+
+        localStorage.setItem(
+
+          'usuarioFoto',
+
+          usuario.foto || ''
+
+        );
+
         if(usuario.foto){
 
           this.fotoUrl=
 
-          `http://localhost:3000/${usuario.foto}`;
+          `http://localhost:3000/${usuario.foto}?t=${Date.now()}`;
 
         }
+
+        this.cdr.detectChanges();
 
       },
 
@@ -166,52 +161,110 @@ export class PerfilComponent {
   ):void{
 
     const arquivo=
-
     event.target.files[0];
 
     if(!arquivo){
+
+      console.log(
+        'Nenhum arquivo'
+      );
 
       return;
 
     }
 
-    this.perfilService
-    .uploadFoto(
+    console.log(
+      'ARQUIVO:',
       arquivo
+    );
+
+    const formData =
+    new FormData();
+
+    formData.append(
+
+      'foto',
+
+      arquivo,
+
+      arquivo.name
+
+    );
+
+    fetch(
+
+      'http://localhost:3000/perfil/foto',
+
+      {
+
+        method:'POST',
+
+        headers:{
+
+          Authorization:
+
+          `Bearer ${localStorage.getItem('token')}`
+
+        },
+
+        body:formData
+
+      }
+
     )
 
-    .subscribe({
+    .then(
 
-      next:(resposta:any)=>{
+      response=>response.json()
 
-        this.fotoUrl=
+    )
 
-        `http://localhost:3000/${resposta.foto}`;
+    .then(
 
-        this.perfilForm
-        .patchValue({
+      (resposta:any)=>{
 
-          foto:
-          resposta.foto
-
-        });
-
-        this.notificacaoService
-        .mostrar(
-
-          'Foto atualizada'
-
+        console.log(
+          resposta
         );
 
-      },
+        if(resposta.caminho){
 
-      error:(err:any)=>{
+          this.fotoUrl=
+
+          `http://localhost:3000/${resposta.caminho}?t=${Date.now()}`;
+
+          this.perfilForm.patchValue({
+
+            foto:
+            resposta.caminho
+
+          });
+
+          localStorage.setItem(
+
+            'usuarioFoto',
+
+            resposta.caminho
+
+          );
+
+          this.cdr.detectChanges();
+
+        }
+
+      }
+
+    )
+
+    .catch(
+
+      (err:any)=>{
 
         console.error(err);
 
       }
 
-    });
+    );
 
   }
 
@@ -222,6 +275,10 @@ export class PerfilComponent {
       this.perfilForm.invalid
 
     ){
+
+      alert(
+        'Preencha os campos corretamente'
+      );
 
       return;
 
@@ -244,6 +301,7 @@ export class PerfilComponent {
     };
 
     this.perfilService
+
     .atualizar(
       dados
     )
@@ -252,11 +310,28 @@ export class PerfilComponent {
 
       next:()=>{
 
-        this.notificacaoService
-        .mostrar(
+        localStorage.setItem(
 
-          'Perfil atualizado'
+          'usuarioNome',
 
+          dados.nome
+
+        );
+
+        localStorage.setItem(
+
+          'usuarioFoto',
+
+          dados.foto || ''
+
+        );
+
+        this.carregarPerfil();
+
+        this.cdr.detectChanges();
+
+        alert(
+          'Perfil atualizado com sucesso'
         );
 
       },
@@ -265,28 +340,14 @@ export class PerfilComponent {
 
         console.error(err);
 
+        alert(
+          'Erro ao atualizar perfil'
+        );
+
       }
 
     });
 
   }
 
-=======
-      senhaAtual: [''],
-
-      novaSenha: ['']
-    });
-  }
-
-  salvarPerfil() {
-    if (this.perfilForm.invalid) {
-      this.perfilForm.markAllAsTouched();
-      return;
-    }
-
-    console.log(
-      this.perfilForm.value
-    );
-  }
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 }

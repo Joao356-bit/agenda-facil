@@ -15,17 +15,10 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-<<<<<<< HEAD
     "multer": "^2.1.1",
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10

@@ -1,5 +1,4 @@
 <div class="agendamento-container">
-<<<<<<< HEAD
 
   <div class="top-area">
 
@@ -9,69 +8,88 @@
         Novo Agendamento
       </h1>
 
-=======
-  <div class="top-area">
-    <div>
-      <h1>Novo Agendamento</h1>
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
       <p>
-        Cadastre um novo atendimento
+        Cadastre um novo atendimento no sistema.
       </p>
 
     </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
   </div>
 
-  <form
-    class="agendamento-card"
-    [formGroup]="agendamentoForm"
-    (ngSubmit)="onSubmit()"
-  >
+  <div class="agendamento-card">
 
-    <div class="input-group">
-<<<<<<< HEAD
+    <div class="form-grid">
 
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-      <label>
-        Cliente
-      </label>
+      <div class="input-group">
 
-      <input
-        type="text"
-        placeholder="Digite o nome do cliente"
-        formControlName="cliente"
-      >
+        <label>
+          Cliente
+        </label>
 
-    </div>
+        <input
+          type="text"
+          placeholder="Digite o nome do cliente"
+          [(ngModel)]="agendamento.cliente"
+        >
 
-    <div class="input-group">
-<<<<<<< HEAD
+      </div>
 
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-      <label>
-        Profissional
-      </label>
+      <div class="input-group">
 
-      <select
-        formControlName="profissional"
-      >
+        <label>
+          Data
+        </label>
 
-        <option value="">
-          Selecione
-        </option>
+        <input
+          type="date"
+          [(ngModel)]="agendamento.data"
+        >
 
-        @for (
-          profissional of profissionais;
-<<<<<<< HEAD
-          track profissional.id
-        ) {
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          Hora
+        </label>
+
+        <input
+          type="time"
+          [(ngModel)]="agendamento.hora"
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          Serviço
+        </label>
+
+        <input
+          type="text"
+          placeholder="Digite o serviço"
+          [(ngModel)]="agendamento.servico"
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          Profissional
+        </label>
+
+        <select
+          [(ngModel)]="agendamento.profissional_id"
+        >
+
+          <option value="">
+            Selecione um profissional
+          </option>
 
           <option
+            *ngFor="let profissional of profissionais"
             [value]="profissional.id"
           >
 
@@ -79,139 +97,21 @@
 
           </option>
 
-        }
+        </select>
 
-      </select>
+      </div>
 
-    </div>
-
-    <div class="input-group">
-
-      <label>
-        Serviço
-      </label>
-
-      <input
-        type="text"
-        placeholder="Digite o serviço"
-        formControlName="servico"
-      >
-
-    </div>
-
-    <div class="input-group">
-
-=======
-          track profissional
-        ) {
-
-          <option [value]="profissional">
-            {{ profissional }}
-          </option>
-
-        }
-      </select>
-    </div>
-
-    <div class="input-group">
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-      <label>
-        Data
-      </label>
-
-      <input
-        type="date"
-        formControlName="data"
-      >
-<<<<<<< HEAD
-
-    </div>
-
-    <div class="input-group">
-
-=======
-    </div>
-
-    <div class="input-group">
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-      <label>
-        Horário
-      </label>
-
-      <select
-        formControlName="horario"
-      >
-<<<<<<< HEAD
-
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-        <option value="">
-          Selecione
-        </option>
-
-        @for (
-          horario of horarios;
-          track horario
-        ) {
-
-<<<<<<< HEAD
-          <option
-            [value]="horario"
-          >
-
-            {{ horario }}
-
-          </option>
-
-        }
-
-      </select>
-
-    </div>
-
-    <div class="input-group">
-
-=======
-          <option [value]="horario">
-            {{ horario }}
-          </option>
-
-        }
-      </select>
-    </div>
-
-    <div class="input-group">
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
-      <label>
-        Observações
-      </label>
-
-      <textarea
-        rows="5"
-        placeholder="Digite observações..."
-        formControlName="observacoes"
-      ></textarea>
-<<<<<<< HEAD
-
-=======
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
     </div>
 
     <button
-      type="submit"
       class="save-btn"
+      (click)="salvarAgendamento()"
     >
-<<<<<<< HEAD
 
       Salvar Agendamento
 
     </button>
 
-  </form>
+  </div>
 
-=======
-      Salvar Agendamento
-    </button>
-  </form>
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 </div>

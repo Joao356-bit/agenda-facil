@@ -1,419 +1,240 @@
-<<<<<<< HEAD
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
   CommonModule
 } from '@angular/common';
-=======
-import { Component } from '@angular/core';
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
 
 import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
+  FormsModule
 } from '@angular/forms';
 
-<<<<<<< HEAD
 import {
   ProfissionalService
 } from '../../services/profissional';
 
-import {
-  BuscaService
-} from '../../services/busca';
-
-import {
-  ConfirmacaoService
-} from '../../services/confirmacao';
-
-import {
-  NotificacaoService
-} from '../../services/notificacao';
-
 @Component({
 
-selector:'app-profissionais',
+  selector:'app-profissionais',
 
-standalone:true,
+  standalone:true,
 
-imports:[
-CommonModule,
-ReactiveFormsModule
-],
+  imports:[
+    CommonModule,
+    FormsModule
+  ],
 
-templateUrl:'./profissionais.html',
+  templateUrl:'./profissionais.html',
 
-styleUrls:[
-'./profissionais.css'
-]
+  styleUrls:[
+    './profissionais.css'
+  ]
 
 })
 
 export class ProfissionaisComponent
 implements OnInit{
 
-profissionais:any[]=[];
+  profissionais:any[]=[];
 
-profissionaisFiltrados:any[]=[];
+  novoProfissional={
 
-modalAberto=false;
+    nome:'',
+    especialidade:'',
+    telefone:''
 
-mensagem='';
+  };
 
-profissionalForm!:FormGroup;
+  constructor(
 
-editando=false;
+    private profissionalService:
+    ProfissionalService,
 
-idEditando:number|null=null;
+    private cdr:
+    ChangeDetectorRef
 
-constructor(
+  ){}
 
-private fb:
-FormBuilder,
+  ngOnInit():void{
 
-private profissionalService:
-ProfissionalService,
+    this.carregarProfissionais();
 
-private buscaService:
-BuscaService,
+  }
 
-private confirmacaoService:
-ConfirmacaoService,
+  carregarProfissionais():void{
 
-private notificacaoService:
-NotificacaoService
+    this.profissionalService
 
-){}
+    .listar()
 
-ngOnInit():void{
+    .subscribe({
 
-this.profissionalForm=
+      next:(response:any)=>{
 
-this.fb.group({
+        console.log(
+          'PROFISSIONAIS RECEBIDOS:',
+          response
+        );
 
-nome:[
-'',
-Validators.required
-],
+        if(Array.isArray(response)){
 
-especialidade:[
-'',
-Validators.required
-],
+          this.profissionais =
+          response;
 
-telefone:['']
+        }else{
 
-});
+          console.warn(
+            'Resposta não é um array:',
+            response
+          );
 
-this.carregarProfissionais();
+          this.profissionais = [];
 
-this.buscaService
-.busca$
-.subscribe({
+        }
 
-next:(texto)=>{
+        console.log(
+          'ARRAY FINAL:',
+          this.profissionais
+        );
 
-this.filtrar(
-texto
-);
+        this.cdr.detectChanges();
 
-}
+      },
 
-});
+      error:(err:any)=>{
 
-}
+        console.error(
+          'ERRO AO CARREGAR PROFISSIONAIS:',
+          err
+        );
 
-carregarProfissionais():void{
+      }
 
-this.profissionalService
-.listar()
-
-.subscribe({
-
-next:(dados:any)=>{
-
-this.profissionais=dados;
-
-this.profissionaisFiltrados=dados;
-
-},
-
-error:(err)=>{
-
-console.error(err);
-
-}
-
-});
-
-}
-
-filtrar(
-texto:string
-):void{
-
-texto=
-texto.toLowerCase();
-
-this.profissionaisFiltrados=
-
-this.profissionais.filter(
-
-(p:any)=>
-
-p.nome
-.toLowerCase()
-.includes(texto)
-
-||
-
-p.especialidade
-.toLowerCase()
-.includes(texto)
-
-);
-
-}
-
-abrirModal():void{
-
-this.modalAberto=true;
-
-this.editando=false;
-
-this.profissionalForm.reset();
-
-}
-
-fecharModal():void{
-
-this.modalAberto=false;
-
-}
-
-adicionarProfissional():void{
-
-if(
-this.profissionalForm.invalid
-){
-
-return;
-
-}
-
-const dados=
-this.profissionalForm.value;
-
-if(this.editando){
-
-this.profissionalService
-.editar(
-
-this.idEditando!,
-dados.nome,
-dados.especialidade,
-dados.telefone
-
-)
-
-.subscribe({
-
-next:()=>{
-
-this.notificacaoService
-.mostrar(
-'Profissional atualizado'
-);
-
-this.carregarProfissionais();
-
-this.fecharModal();
-
-}
-
-});
-
-}else{
-
-this.profissionalService
-.criar(
-
-dados.nome,
-dados.especialidade,
-dados.telefone
-
-)
-
-.subscribe({
-
-next:()=>{
-
-this.notificacaoService
-.mostrar(
-'Profissional cadastrado'
-);
-
-this.carregarProfissionais();
-
-this.fecharModal();
-
-}
-
-});
-
-}
-
-}
-
-editarProfissional(
-profissional:any
-):void{
-
-this.editando=true;
-
-this.idEditando=
-profissional.id;
-
-this.modalAberto=true;
-
-this.profissionalForm.patchValue({
-
-nome:
-profissional.nome,
-
-especialidade:
-profissional.especialidade,
-
-telefone:
-profissional.telefone
-
-});
-
-}
-
-excluirProfissional(
-id:number
-):void{
-
-this.confirmacaoService
-.abrir(
-
-'Deseja excluir este profissional?',
-
-()=>{
-
-this.profissionalService
-.excluir(id)
-
-.subscribe({
-
-next:()=>{
-
-this.notificacaoService
-.mostrar(
-'Profissional removido'
-);
-
-this.carregarProfissionais();
-
-}
-
-});
-
-}
-
-);
-
-}
-
-=======
-@Component({
-  selector: 'app-profissionais',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './profissionais.html',
-  styleUrls: ['./profissionais.css']
-})
-export class ProfissionaisComponent {
-  modalAberto = false;
-  mensagem = '';
-  profissionalForm: FormGroup;
-  profissionais = [
-    {
-      nome: 'Dr. João Silva',
-      especialidade: 'Cardiologista',
-      email: 'joao@email.com'
-    },
-
-    {
-      nome: 'Dra. Ana Souza',
-      especialidade: 'Pediatra',
-      email: 'ana@email.com'
-    },
-
-    {
-      nome: 'Dr. Pedro Lima',
-      especialidade: 'Dermatologista',
-      email: 'pedro@email.com'
-    }
-  ];
-
-  constructor(private fb: FormBuilder) {
-    this.profissionalForm = this.fb.group({
-      nome: [
-        '',
-        Validators.required
-      ],
-
-      especialidade: [
-        '',
-        Validators.required
-      ],
-
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ]
     });
+
   }
 
-  abrirModal() {
-    this.modalAberto = true;
-  }
+  adicionarProfissional():void{
 
-  fecharModal() {
-    this.modalAberto = false;
-    this.profissionalForm.reset();
-  }
+    if(
 
-  adicionarProfissional() {
-    if (this.profissionalForm.invalid) {
-      this.profissionalForm.markAllAsTouched();
+      !this.novoProfissional.nome ||
+      !this.novoProfissional.especialidade ||
+      !this.novoProfissional.telefone
+
+    ){
+
+      alert(
+        'Preencha todos os campos'
+      );
+
       return;
+
     }
-    this.profissionais.push(
-      this.profissionalForm.value
-    );
 
-    this.mensagem =
-      'Profissional cadastrado com sucesso!';
-    setTimeout(() => {
-      this.mensagem = '';
-    }, 3000);
-    this.fecharModal();
+    const profissional={
+
+      nome:this.novoProfissional.nome,
+
+      especialidade:this.novoProfissional.especialidade,
+
+      telefone:this.novoProfissional.telefone
+
+    };
+
+    this.profissionalService
+
+    .criar(
+
+      profissional.nome,
+      profissional.especialidade,
+      profissional.telefone
+
+    )
+
+    .subscribe({
+
+      next:(response:any)=>{
+
+        this.profissionais=[
+
+          ...this.profissionais,
+
+          {
+
+            id:response.id,
+
+            ...profissional
+
+          }
+
+        ];
+
+        this.novoProfissional={
+
+          nome:'',
+          especialidade:'',
+          telefone:''
+
+        };
+
+        this.cdr.detectChanges();
+
+        alert(
+          'Profissional cadastrado com sucesso'
+        );
+
+      },
+
+      error:(err:any)=>{
+
+        console.error(err);
+
+        alert(
+          'Erro ao cadastrar profissional'
+        );
+
+      }
+
+    });
+
   }
 
-  excluirProfissional(index: number) {
-    this.profissionais.splice(index, 1);
+  excluirProfissional(id:number):void{
+
+    this.profissionalService
+
+    .excluir(id)
+
+    .subscribe({
+
+      next:()=>{
+
+        this.profissionais=
+
+        this.profissionais.filter(
+
+          profissional=>
+
+          profissional.id !== id
+
+        );
+
+        this.cdr.detectChanges();
+
+      },
+
+      error:(err:any)=>{
+
+        console.error(err);
+
+      }
+
+    });
 
   }
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
 }

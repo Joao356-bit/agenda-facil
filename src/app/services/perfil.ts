@@ -4,7 +4,8 @@ import {
 } from '@angular/core';
 
 import {
-  HttpClient
+  HttpClient,
+  HttpHeaders
 } from '@angular/common/http';
 
 import {
@@ -68,9 +69,15 @@ export class PerfilService {
     formData.append(
 
       'foto',
-      arquivo
+
+      arquivo,
+
+      arquivo.name
 
     );
+
+    const token =
+    this.authService.getToken();
 
     return this.http.post(
 
@@ -78,8 +85,18 @@ export class PerfilService {
 
       formData,
 
-      this.authService
-      .getAuthHeaders()
+      {
+
+        headers:
+
+        new HttpHeaders({
+
+          Authorization:
+          `Bearer ${token}`
+
+        })
+
+      }
 
     );
 

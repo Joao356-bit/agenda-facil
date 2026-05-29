@@ -1,224 +1,110 @@
 <div class="perfil-container">
-<<<<<<< HEAD
 
-<div class="top-area">
-
-<div>
-
-<h1>
-Meu Perfil
-</h1>
-
-<p>
-Gerencie suas informações pessoais
-</p>
-
-</div>
-
-</div>
-
-<form
-
-class="perfil-card"
-
-[formGroup]="perfilForm"
-
-(ngSubmit)="salvarPerfil()"
-
->
-
-<div class="profile-image-area">
-
-<div class="profile-image">
-
-@if(fotoUrl){
-
-<img
-[src]="fotoUrl"
-width="100"
-height="100"
-style="
-border-radius:50%;
-object-fit:cover;
-">
-
-}
-
-@else{
-
-JL
-
-}
-
-</div>
-
-<input
-
-type="file"
-
-accept="image/*"
-
-hidden
-
-#inputFoto
-
-(change)="selecionarFoto($event)"
-
->
-
-<button
-
-type="button"
-
-class="upload-btn"
-
-(click)="inputFoto.click()"
-
->
-
-Alterar Foto
-
-</button>
-
-</div>
-
-<div class="input-group">
-
-<label>
-Nome
-</label>
-
-<input
-type="text"
-formControlName="nome">
-
-</div>
-
-<div class="input-group">
-
-<label>
-Email
-</label>
-
-<input
-type="email"
-formControlName="email">
-
-</div>
-
-<div class="input-group">
-
-<label>
-Senha Atual
-</label>
-
-<input
-type="password"
-formControlName="senhaAtual">
-
-</div>
-
-<div class="input-group">
-
-<label>
-Nova Senha
-</label>
-
-<input
-type="password"
-formControlName="novaSenha">
-
-</div>
-
-<button
-type="submit"
-class="save-btn">
-
-Salvar Alterações
-
-</button>
-
-</form>
-
-=======
   <div class="top-area">
-    <div>
-      <h1>Meu Perfil</h1>
-      <p>
-        Gerencie suas informações pessoais
-      </p>
 
-    </div>
+    <h1>
+      Meu Perfil
+    </h1>
+
+    <p>
+      Atualize suas informações pessoais.
+    </p>
+
   </div>
 
-  <form
-    class="perfil-card"
-    [formGroup]="perfilForm"
-    (ngSubmit)="salvarPerfil()"
-  >
+  <div class="perfil-card">
 
-    <div class="profile-image-area">
-      <div class="profile-image">
-        JL
-      </div>
-      <button
-        type="button"
-        class="upload-btn"
-      >
-        Alterar Foto
-      </button>
-    </div>
-
-    <div class="input-group">
-      <label>
-        Nome
-      </label>
-
-      <input
-        type="text"
-        formControlName="nome"
-      >
-    </div>
-
-    <div class="input-group">
-      <label>
-        Email
-      </label>
-
-      <input
-        type="email"
-        formControlName="email"
-      >
-    </div>
-
-    <div class="input-group">
-      <label>
-        Senha Atual
-      </label>
-
-      <input
-        type="password"
-        formControlName="senhaAtual"
-      >
-    </div>
-
-    <div class="input-group">
-      <label>
-        Nova Senha
-      </label>
-
-      <input
-        type="password"
-        formControlName="novaSenha"
-      >
-    </div>
-
-    <button
-      type="submit"
-      class="save-btn"
+    <form
+      [formGroup]="perfilForm"
+      (ngSubmit)="salvarPerfil()"
     >
-      Salvar Alterações
-    </button>
-  </form>
->>>>>>> f37fbba775926c84c7a0cff60e6e4fcb8247cc10
+
+      <div class="profile-image-area">
+
+        <div class="profile-image">
+
+          <img
+
+            *ngIf="fotoUrl"
+
+            [src]="fotoUrl"
+
+            alt="Foto do perfil"
+
+          >
+
+          <span *ngIf="!fotoUrl">
+
+            A
+
+          </span>
+
+        </div>
+
+        <div>
+
+          <input
+            type="file"
+            (change)="selecionarFoto($event)"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          Nome
+        </label>
+
+        <input
+          type="text"
+          formControlName="nome"
+          placeholder="Digite seu nome"
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          E-mail
+        </label>
+
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu e-mail"
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          Nova senha
+        </label>
+
+        <input
+          type="password"
+          formControlName="novaSenha"
+          placeholder="Digite uma nova senha"
+        >
+
+      </div>
+
+      <button
+        class="save-btn"
+        type="submit"
+      >
+
+        Salvar Alterações
+
+      </button>
+
+    </form>
+
+  </div>
+
 </div>

@@ -7,69 +7,112 @@
 .layout-container {
   display: flex;
   min-height: 100vh;
-  background-color: #f4f6fb;
+  background: #f4f7fb;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* SIDEBAR */
+
 .sidebar {
-  width: 260px;
-  background-color: #243bff;
+  width: 270px;
+  background: linear-gradient(
+    180deg,
+    #243bff 0%,
+    #1c2fd1 100%
+  );
+
   color: white;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 25px 20px;
+
+  padding: 30px 22px;
+
+  box-shadow: 4px 0 25px rgba(0,0,0,0.08);
 }
 
 .logo {
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 .logo h2 {
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .menu a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
   text-decoration: none;
   color: white;
-  font-size: 16px;
-  padding: 14px 16px;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+
+  font-size: 15px;
   font-weight: 500;
+
+  padding: 15px 18px;
+
+  border-radius: 14px;
+
+  transition: all 0.25s ease;
+}
+
+.menu a i {
+  font-size: 17px;
 }
 
 .menu a:hover {
-  background-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255,255,255,0.16);
+
+  transform: translateX(4px);
 }
 
 .active-link {
-  background-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255,255,255,0.22);
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.10);
 }
 
+/* FOOTER */
+
 .sidebar-footer {
-  margin-top: 40px;
+  margin-top: 45px;
 }
 
 .logout-btn {
-  display: block;
-  padding: 14px 16px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 15px 18px;
+
+  border-radius: 14px;
+
   cursor: pointer;
-  transition: 0.3s;
-  background-color: rgba(255,255,255,0.12);
+
+  background: rgba(255,255,255,0.12);
+
+  transition: 0.25s ease;
+
+  font-weight: 500;
 }
 
 .logout-btn:hover {
-  background-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.20);
+
+  transform: translateY(-2px);
 }
+
+/* MAIN */
 
 .main-content {
   flex: 1;
@@ -77,40 +120,114 @@
   flex-direction: column;
 }
 
+/* HEADER */
+
 .header {
-  height: 80px;
-  background-color: white;
+  height: 85px;
+
+  background: white;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+  padding: 0 35px;
+
+  border-bottom: 1px solid #edf0f6;
+
+  box-shadow: 0 3px 15px rgba(0,0,0,0.03);
 }
 
 .search-input {
-  width: 320px;
-  padding: 12px 16px;
-  border-radius: 10px;
-  border: 1px solid #dcdcdc;
+  width: 340px;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid #dde2ef;
+
   outline: none;
+
   font-size: 15px;
-  transition: 0.3s;
+
+  background: #f8faff;
+
+  transition: 0.25s ease;
 }
 
 .search-input:focus {
   border-color: #243bff;
+
+  box-shadow: 0 0 0 4px rgba(36,59,255,0.10);
 }
 
 .user-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
   font-weight: 600;
-  color: #333;
+  color: #2d2d2d;
 }
+
+.user-area i {
+  font-size: 34px;
+  color: #243bff;
+}
+
+/* CONTENT */
 
 .page-content {
-  padding: 30px;
+  padding: 35px;
 }
 
+/* TOAST */
+
+.toast-global {
+  position: fixed;
+
+  top: 20px;
+  right: 20px;
+
+  background: #22c55e;
+  color: white;
+
+  padding: 16px 22px;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-weight: 600;
+
+  z-index: 9999;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+
+  animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+/* RESPONSIVIDADE */
+
 @media (max-width: 900px) {
+
   .sidebar {
     width: 220px;
   }
@@ -122,6 +239,7 @@
 }
 
 @media (max-width: 768px) {
+
   .layout-container {
     flex-direction: column;
   }
@@ -131,19 +249,50 @@
   }
 
   .header {
+
     padding: 20px;
+
     flex-direction: column;
-    gap: 15px;
+
+    gap: 16px;
+
     height: auto;
   }
 
   .search-input {
     width: 100%;
   }
+
+  .page-content {
+    padding: 20px;
+  }
+
 }
 
-.menu a {
+.user-area {
+
   display: flex;
+
   align-items: center;
+
   gap: 12px;
+
+  font-weight: 600;
+
+  color: #222;
+
+}
+
+.user-avatar {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 2px solid #243bff;
+
 }
