@@ -27,7 +27,7 @@ export class PerfilService {
   inject(AuthService);
 
   private apiUrl =
-  'http://localhost:3000/perfil';
+'https://agenda-facil-api.onrender.com/perfil';
 
   buscar(){
 

@@ -130,21 +130,11 @@ implements OnInit{
     'usuarioFoto'
   );
 
-  console.log(
-    'NOME:',
-    this.usuarioNome
-  );
-
-  console.log(
-    'FOTO:',
-    foto
-  );
-
   if(foto){
 
     this.usuarioFoto =
 
-    `http://localhost:3000/${foto}?t=${Date.now()}`;
+    `https://agenda-facil-api.onrender.com/${foto}?t=${Date.now()}`;
 
   }
 

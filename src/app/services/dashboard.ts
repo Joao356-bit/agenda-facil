@@ -30,7 +30,7 @@ export class DashboardService {
   inject(AuthService);
 
   private apiUrl =
-  'http://localhost:3000/dashboard';
+  'https://agenda-facil-api.onrender.com/dashboard';
 
   resumo():Observable<any>{
 

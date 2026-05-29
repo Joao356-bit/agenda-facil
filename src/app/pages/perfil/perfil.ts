@@ -138,7 +138,7 @@ implements OnInit{
 
           this.fotoUrl=
 
-          `http://localhost:3000/${usuario.foto}?t=${Date.now()}`;
+          `https://agenda-facil-api.onrender.com/${usuario.foto}?t=${Date.now()}`;
 
         }
 
@@ -165,18 +165,9 @@ implements OnInit{
 
     if(!arquivo){
 
-      console.log(
-        'Nenhum arquivo'
-      );
-
       return;
 
     }
-
-    console.log(
-      'ARQUIVO:',
-      arquivo
-    );
 
     const formData =
     new FormData();
@@ -193,7 +184,7 @@ implements OnInit{
 
     fetch(
 
-      'http://localhost:3000/perfil/foto',
+      'https://agenda-facil-api.onrender.com/perfil/foto',
 
       {
 
@@ -223,15 +214,11 @@ implements OnInit{
 
       (resposta:any)=>{
 
-        console.log(
-          resposta
-        );
-
         if(resposta.caminho){
 
           this.fotoUrl=
 
-          `http://localhost:3000/${resposta.caminho}?t=${Date.now()}`;
+          `https://agenda-facil-api.onrender.com/${resposta.caminho}?t=${Date.now()}`;
 
           this.perfilForm.patchValue({
 

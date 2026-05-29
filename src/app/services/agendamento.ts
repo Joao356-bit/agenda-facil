@@ -30,7 +30,7 @@ export class AgendamentoService {
   inject(AuthService);
 
   private apiUrl =
-  'http://localhost:3000/agendamentos';
+'https://agenda-facil-api.onrender.com/agendamentos';
 
   listar():
   Observable<any>{

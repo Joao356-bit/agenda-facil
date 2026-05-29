@@ -24,7 +24,7 @@ providedIn:'root'
 export class AuthService {
 
 private apiUrl=
-'http://localhost:3000/auth';
+'https://agenda-facil-api.onrender.com/auth';
 
 constructor(
 

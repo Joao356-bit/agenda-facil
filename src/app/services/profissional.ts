@@ -30,7 +30,7 @@ export class ProfissionalService {
   inject(AuthService);
 
   private apiUrl =
-  'http://localhost:3000/profissionais';
+'https://agenda-facil-api.onrender.com/profissionais';
 
   listar():Observable<any>{
 
